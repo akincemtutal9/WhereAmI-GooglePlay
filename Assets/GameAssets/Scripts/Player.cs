@@ -9,11 +9,12 @@ namespace GameAssets.Scripts
         [SerializeField] private string name;
         [SerializeField] private Role role;
         [SerializeField] private int voteCount = 0;
-        public Player(string name, Role role, int voteCount)
+        
+        public Player(string name)
         {
             this.name = name;
-            this.role = role;
-            this.voteCount = voteCount;
+            role = Role.CREWMATE;
+            voteCount = 0;
         }
 
         public string Name
@@ -37,4 +38,7 @@ namespace GameAssets.Scripts
         CREWMATE,
         IMPOSTOR
     }
+    
+    
+    
 }

@@ -22,6 +22,8 @@ namespace GameAssets.Scripts
         [SerializeField] private Transform playerGrid; // MainPanel'i ata
         [SerializeField] private GameObject playerUIPrefab; // PlayerShowcase'i bi dene
         
+        // Oyuncu eklerken lazım olucak
+        [SerializeField] private TMP_InputField playerNameInputField;
         protected override void Start()
         {
             HandleClosePlayerAddingPanelButton();// Unutursak hieraarchy'de kodla kapatsın gereksiz uiları
@@ -35,6 +37,7 @@ namespace GameAssets.Scripts
             
             UpdatePlayerListUI();   
         }
+        
         private void HandleStartGameButton()
         {
             //oyunu başlat
@@ -60,10 +63,23 @@ namespace GameAssets.Scripts
         }
         private void HandleAddPlayerToGameButton()
         {
-            //oyuncuyu oyuna ekle
+            if (playerNameInputField.text != "")
+            {
+                var player = new Player(playerNameInputField.text);
+                GameManager.Instance.GamePlayers.Add(player);
+            }
+            playerNameInputField.text = "";
+            HandleClosePlayerAddingPanelButton();
+            UpdatePlayerListUI();
         }
         private void UpdatePlayerListUI()
         {
+            //Gridi temizle sonra eklicez listedekileri
+            foreach (Transform child in playerGrid)
+            {
+                Destroy(child.gameObject);
+            }
+            
             foreach (Player player in GameManager.Instance.GamePlayers)
             {
                 GameObject playerUI = Instantiate(playerUIPrefab, playerGrid, true);
@@ -75,6 +91,7 @@ namespace GameAssets.Scripts
                 playerButton.onClick.AddListener(() => HandlePlayerButtonClick(player));
             }
         }
+
         private void HandlePlayerButtonClick(Player player)
         {
             Debug.Log("Player clicked: " + player.Name);

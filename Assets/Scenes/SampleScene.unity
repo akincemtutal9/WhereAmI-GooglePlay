@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 449621944}
   - component: {fileID: 449621943}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: PlayerNameInputField (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2299,6 +2299,7 @@ MonoBehaviour:
   addPlayerToGameButton: {fileID: 1470267431}
   playerGrid: {fileID: 830407799}
   playerUIPrefab: {fileID: 7661436333828756458, guid: d05e4c542e27c6b418efb9375ad9a0d2, type: 3}
+  playerNameInputField: {fileID: 449621943}
 --- !u!1 &866696159
 GameObject:
   m_ObjectHideFlags: 0
