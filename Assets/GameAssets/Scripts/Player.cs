@@ -7,8 +7,8 @@ namespace GameAssets.Scripts
     public class Player
     {
         [SerializeField] private string name;
-        private Role role;
-        private int voteCount;
+        [SerializeField] private Role role;
+        [SerializeField] private int voteCount = 0;
         public Player(string name, Role role, int voteCount)
         {
             this.name = name;
@@ -34,9 +34,7 @@ namespace GameAssets.Scripts
     }
     public enum Role
     {
-        IMPOSTOR,
-        CREWMATE
+        CREWMATE,
+        IMPOSTOR
     }
-    
-    
 }

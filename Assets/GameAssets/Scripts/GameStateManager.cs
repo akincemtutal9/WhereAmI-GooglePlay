@@ -47,11 +47,11 @@ namespace GameAssets.Scripts
             // Başlangıçta ana menüyü etkinleştirin
             SwitchGameState(GameState.MAINMENU);
         }
-
         public void SwitchGameState(GameState newGameState)
         {
             // Tüm game objectleri devre dışı bırakın
             mainMenuObject.SetActive(false);
+            startGameObject.SetActive(false);
             playerLibraryObject.SetActive(false);
             settingsObject.SetActive(false);
             debateObject.SetActive(false);
