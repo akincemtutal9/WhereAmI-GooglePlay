@@ -7,34 +7,48 @@ namespace GameAssets.Scripts
 {
     public class StartGamePage : GameStateManagerProvider
     {
+        [Header("Top Panel")]
         [SerializeField] private GameObject topPanel;
         [SerializeField] private Button backToMainPageButton;
         [SerializeField] private Button addPlayerButton;
 
+        [Header("Main Panel")]
         [SerializeField] private GameObject mainPanel;
-        [SerializeField] private Button startGameButton;
 
-        
+        [Header("Player Adding Panel")]
         [SerializeField] private GameObject playerAddingPanel;
         [SerializeField] private Button closePlayerAddingPanelButton;
         [SerializeField] private Button addPlayerToGameButton;
+        [SerializeField] private TMP_InputField playerNameInputField;
         
+        [Header("Player Edit Panel")]
+        [SerializeField] private GameObject playerEditPanel;
+        [SerializeField] private TMP_Text playerPlaceholderName;
+        [SerializeField] private TMP_InputField playerNewName;
+        [SerializeField] private Button updatePlayerButton;
+        [SerializeField] private Button deletePlayerButton;
+        [SerializeField] private Button closePlayerEditPanelButton;
+
+        [Header("Main Panel Grid")]
         [SerializeField] private Transform playerGrid; // MainPanel'i ata
         [SerializeField] private GameObject playerUIPrefab; // PlayerShowcase'i bi dene
         
-        // Oyuncu eklerken lazım olucak
-        [SerializeField] private TMP_InputField playerNameInputField;
+        [Header("BottomPanel")]
+        [SerializeField] private GameObject bottomPanel;
+        [SerializeField] private Button startGameButton;
+
+        
         protected override void Start()
         {
             HandleClosePlayerAddingPanelButton();// Unutursak hieraarchy'de kodla kapatsın gereksiz uiları
-            
+            HandleClosePlayerEditPanelButton();
             base.Start();
             backToMainPageButton.onClick.AddListener(HandleBackToMainPageButton);
             addPlayerButton.onClick.AddListener(HandleAddPlayerButton);
             startGameButton.onClick.AddListener(HandleStartGameButton);
             closePlayerAddingPanelButton.onClick.AddListener(HandleClosePlayerAddingPanelButton);
             addPlayerToGameButton.onClick.AddListener(HandleAddPlayerToGameButton);
-            
+            closePlayerEditPanelButton.onClick.AddListener(HandleClosePlayerEditPanelButton);
             UpdatePlayerListUI();   
         }
         
@@ -57,9 +71,23 @@ namespace GameAssets.Scripts
         }
         private void HandleClosePlayerAddingPanelButton()
         {
+            //Add Paneli kapat
+            playerAddingPanel.SetActive(false);
+            
             topPanel.SetActive(true);
             mainPanel.SetActive(true);
-            playerAddingPanel.SetActive(false);
+            bottomPanel.SetActive(true);
+        }
+        
+        private void HandleClosePlayerEditPanelButton()
+        {
+            //
+            playerEditPanel.SetActive(false);
+            
+            mainPanel.SetActive(true);
+            topPanel.SetActive(true);
+            bottomPanel.SetActive(true);
+
         }
         private void HandleAddPlayerToGameButton()
         {
@@ -91,12 +119,36 @@ namespace GameAssets.Scripts
                 playerButton.onClick.AddListener(() => HandlePlayerButtonClick(player));
             }
         }
-
         private void HandlePlayerButtonClick(Player player)
         {
             Debug.Log("Player clicked: " + player.Name);
+            playerEditPanel.SetActive(true);
+            topPanel.SetActive(false);
+            mainPanel.SetActive(false);
+
+            playerPlaceholderName.text = player.Name;
+
+            updatePlayerButton.onClick.RemoveAllListeners(); // Temizle önceki dinleyicileri
+            updatePlayerButton.onClick.AddListener(() => HandleUpdatePlayerButton(player));
+
+            deletePlayerButton.onClick.RemoveAllListeners(); // Temizle önceki dinleyicileri
+            deletePlayerButton.onClick.AddListener(() => HandleDeletePlayerButton(player));
         }
-        
+
+        private void HandleDeletePlayerButton(Player player)
+        {
+            GameManager.Instance.GamePlayers.Remove(player);
+            HandleClosePlayerEditPanelButton();
+            UpdatePlayerListUI();
+        }
+
+        private void HandleUpdatePlayerButton(Player player)
+        {
+            player.Name = playerNewName.text;
+            HandleClosePlayerEditPanelButton();
+            UpdatePlayerListUI();
+            playerNewName.text = ""; // Boşalt burayı milletin kafası karışmasın
+        }
     }
 }
 
