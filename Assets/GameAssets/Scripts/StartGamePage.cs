@@ -1,6 +1,6 @@
+using GameAssets.Scripts.Managers;
 using GameAssets.Scripts.Utils;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,7 +104,7 @@ namespace GameAssets.Scripts
                 return;
             }
             
-            var player = new Player(playerNameInputField.text);
+            var player = new Player.Player(playerNameInputField.text);
             GameManager.Instance.GamePlayers.Add(player);
             playerNameInputField.text = "";
             HandleClosePlayerAddingPanelButton();
@@ -118,7 +118,7 @@ namespace GameAssets.Scripts
                 Destroy(child.gameObject);
             }
             
-            foreach (Player player in GameManager.Instance.GamePlayers)
+            foreach (Player.Player player in GameManager.Instance.GamePlayers)
             {
                 GameObject playerUI = Instantiate(playerUIPrefab, playerGrid, true);
 
@@ -129,12 +129,13 @@ namespace GameAssets.Scripts
                 playerButton.onClick.AddListener(() => HandlePlayerButtonClick(player));
             }
         }
-        private void HandlePlayerButtonClick(Player player)
+        private void HandlePlayerButtonClick(Player.Player player)
         {
             Debug.Log("Player clicked: " + player.Name);
             playerEditPanel.SetActive(true);
             topPanel.SetActive(false);
             mainPanel.SetActive(false);
+            bottomPanel.SetActive(false);
 
             playerPlaceholderName.text = player.Name;
 
@@ -145,15 +146,25 @@ namespace GameAssets.Scripts
             deletePlayerButton.onClick.AddListener(() => HandleDeletePlayerButton(player));
         }
 
-        private void HandleDeletePlayerButton(Player player)
+        private void HandleDeletePlayerButton(Player.Player player)
         {
             GameManager.Instance.GamePlayers.Remove(player);
             HandleClosePlayerEditPanelButton();
             UpdatePlayerListUI();
         }
 
-        private void HandleUpdatePlayerButton(Player player)
+        private void HandleUpdatePlayerButton(Player.Player player)
         {
+            if (playerNewName.text == "")
+            {
+                ErrorController.Instance.ShowError("Player name cannot be empty!");
+                return;
+            }
+            if (IsPlayerNameExists(playerNewName.text))
+            {
+                ErrorController.Instance.ShowError("Player name already exists!");
+                return;
+            }
             player.Name = playerNewName.text;
             HandleClosePlayerEditPanelButton();
             UpdatePlayerListUI();
@@ -162,7 +173,7 @@ namespace GameAssets.Scripts
         
         private bool IsPlayerNameExists(string playerName)
         {
-            foreach (Player player in GameManager.Instance.GamePlayers)
+            foreach (Player.Player player in GameManager.Instance.GamePlayers)
             {
                 if (player.Name == playerName)
                 {

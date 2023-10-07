@@ -1,3 +1,4 @@
+using GameAssets.Scripts.Managers;
 using UnityEngine;
 
 namespace GameAssets.Scripts.Utils

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameAssets.Scripts.Utils
+namespace GameAssets.Scripts.Managers
 {
     public class ErrorController : MonoBehaviour
     {

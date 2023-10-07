@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GameAssets.Scripts
+namespace GameAssets.Scripts.Player
 {
     [Serializable]
     public class Player

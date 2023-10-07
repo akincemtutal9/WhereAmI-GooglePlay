@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameAssets.Scripts
+namespace GameAssets.Scripts.Managers
 {
     public class GameManager : MonoBehaviour
     {
         private static GameManager instance;
         public static GameManager Instance => instance;
 
-        [SerializeField] private List<Player> gamePlayers = new();
+        [SerializeField] private List<Player.Player> gamePlayers = new();
 
-        public List<Player> GamePlayers
+        public List<Player.Player> GamePlayers
         {
             get => gamePlayers;
             set => gamePlayers = value;
