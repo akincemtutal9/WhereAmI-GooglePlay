@@ -16,6 +16,7 @@ namespace GameAssets.Scripts.Managers
             VICTORY,
             VOTE,
             LOSE,
+            CHECKROLE
         }
 
         [SerializeField] private GameState currentGameState; // Aktif game state'i saklayacak değişken
@@ -28,6 +29,7 @@ namespace GameAssets.Scripts.Managers
         [SerializeField] private GameObject victoryObject;
         [SerializeField] private GameObject voteObject;
         [SerializeField] private GameObject loseObject;
+        [SerializeField] private GameObject checkRoleObject;
 
         private void Awake()
         {
@@ -58,6 +60,7 @@ namespace GameAssets.Scripts.Managers
             victoryObject.SetActive(false);
             voteObject.SetActive(false);
             loseObject.SetActive(false);
+            checkRoleObject.SetActive(false);
 
             // Yeni game state'e göre sadece ilgili game objecti etkinleştirin
             switch (newGameState)
@@ -85,6 +88,9 @@ namespace GameAssets.Scripts.Managers
                     break;
                 case GameState.LOSE:
                     loseObject.SetActive(true);
+                    break;
+                case GameState.CHECKROLE:
+                    checkRoleObject.SetActive(true);
                     break;
             }
 

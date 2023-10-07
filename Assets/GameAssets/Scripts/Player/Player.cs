@@ -9,12 +9,14 @@ namespace GameAssets.Scripts.Player
         [SerializeField] private string name;
         [SerializeField] private Role role;
         [SerializeField] private int voteCount = 0;
+        [SerializeField] private string place;
         
         public Player(string name)
         {
             this.name = name;
             role = Role.CREWMATE;
             voteCount = 0;
+            place = "";
         }
 
         public string Name
@@ -31,6 +33,11 @@ namespace GameAssets.Scripts.Player
         {
             get => voteCount;
             set => voteCount = value;
+        }
+        public string Place
+        {
+            get => place;
+            set => place = value;
         }
     }
     public enum Role

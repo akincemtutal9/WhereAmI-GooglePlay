@@ -55,8 +55,13 @@ namespace GameAssets.Scripts
         
         private void HandleStartGameButton()
         {
-            //oyunu başlat
-            gameStateManager.SwitchGameState(GameStateManager.GameState.STARTGAME);
+            if (GameManager.Instance.GamePlayers.Count < 3)
+            {
+                ErrorController.Instance.ShowError("You need at least 3 players to start the game!");
+                return;
+            }
+            GameManager.Instance.StartGame();
+            gameStateManager.SwitchGameState(GameStateManager.GameState.CHECKROLE);
         }
 
         private void HandleBackToMainPageButton()
