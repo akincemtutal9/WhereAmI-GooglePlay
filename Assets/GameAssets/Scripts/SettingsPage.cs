@@ -38,12 +38,14 @@ namespace GameAssets.Scripts
                 soundButton.image.color = Color.blue;
                 soundText.text = "Sound: ON";
                 isSoundOpen = false;
+                SoundManager.instance.StartMusic();
             }
             else
             {
                 soundButton.image.color = Color.red;
                 soundText.text = "Sound: OFF";
                 isSoundOpen = true;   
+                SoundManager.instance.StopMusic();
             }
         }
         private void OnSfxButtonClicked()
@@ -53,12 +55,14 @@ namespace GameAssets.Scripts
                 sfxButton.image.color = Color.blue;
                 sfxText.text = "SFX: ON";
                 isSfxOpen = false;
+                SoundManager.instance.StartSfx();
             }
             else
             {
                 sfxButton.image.color = Color.red;
                 sfxText.text = "SFX: OFF";
                 isSfxOpen = true;   
+                SoundManager.instance.StopSfx();
             }
         }
         private void OnBackButtonClicked()
