@@ -8,26 +8,33 @@ namespace GameAssets.Scripts
 {
     public class CheckRolePage : GameStateManagerProvider
     {
+        [Header("Top Panel")]
         [SerializeField] private Button backButton;
         [SerializeField] private TMP_Text deviceTurnText; // Üstte yazan cihazı şuna ver buna ver muhabbeti
         
-        
+        [Header("Enterance Panel")]
+        [SerializeField] private GameObject enterancePanel;
+        [SerializeField] private Button enteranceButton;
+
+        [Header("Main Panel")]
         [SerializeField] private Button showRoleButton;
         [SerializeField] private Button checkRoleButton;
         [SerializeField] private TMP_Text rolePlaceText;
         
         
+        [Header("Bottom Panel")]
         [SerializeField] private Button nextPlayerButton; // Bu buton aynı zamanda bu kısmı bitirecek btw ona göre
         private int currentPlayerIndex = 0;
+        
         protected override void Start()
         {
-            HandleNextPlayerButton();// Bi tur ilerletiyorum burda güzel başlıyo sarıyo
-            
+            ResetChecking();
             base.Start();
             backButton.onClick.AddListener(HandleBackButton);
             showRoleButton.onClick.AddListener(HandleShowRoleButton);
             checkRoleButton.onClick.AddListener(HandleCheckRoleButton);
             nextPlayerButton.onClick.AddListener(HandleNextPlayerButton);
+            enteranceButton.onClick.AddListener(HandleEnteranceButton);
         }
 
         private void ResetChecking()
@@ -39,6 +46,11 @@ namespace GameAssets.Scripts
         private void HandleBackButton()
         {
             gameStateManager.SwitchGameState(GameStateManager.GameState.STARTGAME);
+        }
+        private void HandleEnteranceButton()
+        {
+            enterancePanel.gameObject.SetActive(false);
+            HandleNextPlayerButton();
         }
         private void HandleShowRoleButton()
         {
@@ -55,9 +67,15 @@ namespace GameAssets.Scripts
             {
                 var player = GameManager.Instance.GamePlayers[currentPlayerIndex];
                 ResetChecking();
-                deviceTurnText.text = "Now it's " + player.Name + "'s turn. Give Device to " + player.Name; // Cihazın sırasını göster
+                deviceTurnText.text = "Now it's <color=yellow>" + player.Name +
+                                      "</color>'s turn. Give Device to <color=yellow>" + player.Name +
+                                      " </color>";
                 CheckPlayerRole(player);
                 currentPlayerIndex++;
+                if (currentPlayerIndex == GameManager.Instance.GamePlayers.Count)
+                {
+                    nextPlayerButton.GetComponentInChildren<TMP_Text>().text = "Start Debate";
+                }
             }
             else
             {
@@ -67,7 +85,7 @@ namespace GameAssets.Scripts
 
         private void CheckPlayerRole(Player.Player player)
         {
-            rolePlaceText.text = player.Name + " is " + player.Role + " and " + player.Place;
+            rolePlaceText.text = "<color=yellow>" + player.Place + "</color>";
         }
     }
 }
