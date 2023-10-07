@@ -1,5 +1,6 @@
 using GameAssets.Scripts.Utils;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -91,11 +92,20 @@ namespace GameAssets.Scripts
         }
         private void HandleAddPlayerToGameButton()
         {
-            if (playerNameInputField.text != "")
+            if (playerNameInputField.text == "")
             {
-                var player = new Player(playerNameInputField.text);
-                GameManager.Instance.GamePlayers.Add(player);
+                ErrorController.Instance.ShowError("Player name cannot be empty!");
+                return;
             }
+            
+            if (IsPlayerNameExists(playerNameInputField.text))
+            {
+                ErrorController.Instance.ShowError("Player name already exists!");
+                return;
+            }
+            
+            var player = new Player(playerNameInputField.text);
+            GameManager.Instance.GamePlayers.Add(player);
             playerNameInputField.text = "";
             HandleClosePlayerAddingPanelButton();
             UpdatePlayerListUI();
@@ -148,6 +158,18 @@ namespace GameAssets.Scripts
             HandleClosePlayerEditPanelButton();
             UpdatePlayerListUI();
             playerNewName.text = ""; // Boşalt burayı milletin kafası karışmasın
+        }
+        
+        private bool IsPlayerNameExists(string playerName)
+        {
+            foreach (Player player in GameManager.Instance.GamePlayers)
+            {
+                if (player.Name == playerName)
+                {
+                    return true;
+                }
+            }
+            return false; 
         }
     }
 }
