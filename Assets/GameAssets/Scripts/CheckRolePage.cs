@@ -25,9 +25,12 @@ namespace GameAssets.Scripts
         [Header("Bottom Panel")]
         [SerializeField] private Button nextPlayerButton; // Bu buton aynı zamanda bu kısmı bitirecek btw ona göre
         private int currentPlayerIndex = 0;
-        
-        protected override void Start()
+        private void OnEnable()
         {
+            if (!GameManager.Instance.isItFirstGame)
+            {
+                HandleNextPlayerButton();
+            }
             ResetChecking();
             base.Start();
             backButton.onClick.AddListener(HandleBackButton);
@@ -35,6 +38,16 @@ namespace GameAssets.Scripts
             checkRoleButton.onClick.AddListener(HandleCheckRoleButton);
             nextPlayerButton.onClick.AddListener(HandleNextPlayerButton);
             enteranceButton.onClick.AddListener(HandleEnteranceButton);
+            nextPlayerButton.GetComponentInChildren<TMP_Text>().text = "Next Player";
+        }
+
+        private void OnDisable()
+        {
+            backButton.onClick.RemoveListener(HandleBackButton);
+            showRoleButton.onClick.RemoveListener(HandleShowRoleButton);
+            checkRoleButton.onClick.RemoveListener(HandleCheckRoleButton);
+            nextPlayerButton.onClick.RemoveListener(HandleNextPlayerButton);
+            enteranceButton.onClick.RemoveListener(HandleEnteranceButton);
         }
 
         private void ResetChecking()
@@ -80,6 +93,7 @@ namespace GameAssets.Scripts
             else
             {
                 gameStateManager.SwitchGameState(GameStateManager.GameState.DEBATE);
+                currentPlayerIndex = 0;
             }
         }
 

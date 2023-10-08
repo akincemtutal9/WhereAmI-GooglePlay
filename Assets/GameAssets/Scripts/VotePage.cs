@@ -19,15 +19,19 @@ namespace GameAssets.Scripts
         private Player.Player selectedPlayer;
         public int currentPlayerIndex = 0;
 
-        protected override void Start()
+        private void OnEnable()
         {
             endVoteSessionButton.gameObject.SetActive(false);
             ShowNextPlayerTurn();
             UpdatePlayerListUI();
             base.Start();
-
             voteButton.onClick.AddListener(HandleVoteButton);
             endVoteSessionButton.onClick.AddListener(HandleEndVoteSessionButton);
+        }
+        private void OnDisable()
+        {
+            voteButton.onClick.RemoveListener(HandleVoteButton);
+            endVoteSessionButton.onClick.RemoveListener(HandleEndVoteSessionButton);
         }
 
         private void UpdatePlayerListUI()
@@ -118,7 +122,7 @@ namespace GameAssets.Scripts
                 }
             }
             CastOut(highestVotePlayer);
-            InfoController.Instance.ShowInfo("<color=yellow>" + highestVotePlayer.Name + " is cast out!</color>");
+            InfoController.Instance.ShowInfo("<color=yellow>" + highestVotePlayer.Name + " is cast out!</color> Impostor still among us!");
             ResetVotes();
         }
         private void ResetVotes()
@@ -147,11 +151,13 @@ namespace GameAssets.Scripts
             if (impostorCount == 0)
             {
                 gameStateManager.SwitchGameState(GameStateManager.GameState.VICTORY);
+                InfoController.Instance.Kill();
             }
             // Eğer oyunda sadece 2 kişi kaldıysa ve biri impostor ise Impostor kazandı
             else if (crewmateCount + impostorCount == 2 && impostorCount > 0)
             {
                 gameStateManager.SwitchGameState(GameStateManager.GameState.LOSE);
+                InfoController.Instance.Kill();
             }
             else
             {

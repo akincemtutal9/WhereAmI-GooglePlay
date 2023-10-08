@@ -61,6 +61,8 @@ namespace GameAssets.Scripts
                 return;
             }
             GameManager.Instance.StartGame();
+            GameManager.Instance.BackupPlayers.Clear();
+            GameManager.Instance.BackupPlayers.AddRange(GameManager.Instance.GamePlayers);
             gameStateManager.SwitchGameState(GameStateManager.GameState.CHECKROLE);
         }
 

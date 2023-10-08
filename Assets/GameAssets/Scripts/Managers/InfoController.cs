@@ -74,6 +74,12 @@ namespace GameAssets.Scripts.Managers
 
             infoObject.SetActive(false);
             isInfoActive = false;
-        }  
+        }
+
+        public void Kill()
+        {
+            infoObject.SetActive(false);
+            isInfoActive = false;
+        }
     }
 }
