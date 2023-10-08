@@ -1,4 +1,5 @@
 using GameAssets.Scripts.Managers;
+using GameAssets.Scripts.Player;
 using GameAssets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -95,6 +96,8 @@ namespace GameAssets.Scripts
             voteButton.gameObject.SetActive(true);
             gameStateManager.SwitchGameState(GameStateManager.GameState.DEBATE);
             ShowNextPlayerTurn();
+            
+            CheckGameResult();
         }
         
         private void CastOut(Player.Player player)
@@ -125,5 +128,38 @@ namespace GameAssets.Scripts
                 player.VoteCount = 0;
             }
         }
+        private void CheckGameResult()
+        {
+            int impostorCount = 0;
+            int crewmateCount = 0;
+            
+            foreach (Player.Player player in GameManager.Instance.GamePlayers)
+            {
+                if (player.Role == Role.IMPOSTOR)
+                {
+                    impostorCount++;
+                }
+                else
+                {
+                    crewmateCount++;
+                }
+            }
+            if (impostorCount == 0)
+            {
+                gameStateManager.SwitchGameState(GameStateManager.GameState.VICTORY);
+            }
+            // Eğer oyunda sadece 2 kişi kaldıysa ve biri impostor ise Impostor kazandı
+            else if (crewmateCount + impostorCount == 2 && impostorCount > 0)
+            {
+                gameStateManager.SwitchGameState(GameStateManager.GameState.LOSE);
+            }
+            else
+            {
+                Debug.Log("Oyun devam edecek");
+            }
+        }
+
+        
+        
     }
 }
