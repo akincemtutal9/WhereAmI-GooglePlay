@@ -38,5 +38,39 @@ namespace GameAssets.Scripts.Managers
                 player.Place = player == gamePlayers[impostorIndex] ? "impostor" : place; // Impostor'a farklı place verme 
             }
         }
+
+        private void ResetVotes()
+        {
+            foreach (var player in gamePlayers)
+            {
+                player.VoteCount = 0;
+            }
+        }
+        private void CastOut(Player.Player player)
+        {
+            gamePlayers.Remove(player);
+        }
+        public void CastOutHighestVotePlayer()
+        {
+            var highestVote = 0;
+            var highestVotePlayer = new Player.Player("");
+            foreach (var player in gamePlayers)
+            {
+                if (player.VoteCount > highestVote)
+                {
+                    highestVote = player.VoteCount;
+                    highestVotePlayer = player;
+                }
+            }
+            CastOut(highestVotePlayer);
+            ResetVotes();
+        }
+        
+        
+        public void ResetGame()
+        {
+            gamePlayers.Clear();
+            //gamePlayers = Sonkalan başlangıç listesi;
+        }
     }
 }
