@@ -23,7 +23,7 @@ namespace GameAssets.Scripts
             }
             base.Start();
             playAgainButton.onClick.AddListener(HandlePlayAgainButton);
-            impostorNameText.text = "<color=yellow> " + impostor + " </color> was the impostor!";
+            impostorNameText.text = "<color=yellow> " + GameManager.Instance.impostorName + " </color> was the impostor!";
         }
         
         private void HandlePlayAgainButton()

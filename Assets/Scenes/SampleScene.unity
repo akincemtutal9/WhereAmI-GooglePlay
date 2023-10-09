@@ -9085,12 +9085,41 @@ MonoBehaviour:
     role: 0
     voteCount: 0
     place: 
+  - name: memo
+    role: 0
+    voteCount: 0
+    place: 
   placeList:
-  - banka
-  - metro
-  - navarro
+  - Kafe
+  - Restoran
+  - Park
+  - Plaj
+  - "M\xFCze"
+  - Sinema
+  - Tiyatro
+  - Stadyum
+  - "G\xF6let"
+  - Orman
+  - "Da\u011F"
+  - "\xC7ar\u015F\u0131 (Pazar)"
+  - Mahalle
+  - Kale
+  - Cami
+  - "Tap\u0131nak"
+  - "Ma\u011Fara"
+  - "\xDCniversite"
+  - Hastane
+  - "K\xFCt\xFCphane"
+  - Market
+  - AVM
+  - "Havaalan\u0131"
+  - Sahil
+  - Genel Ev
+  - Lunapark
+  - Banka
   backupPlayers: []
   isItFirstGame: 1
+  impostorName: 
 --- !u!1 &1992773644
 GameObject:
   m_ObjectHideFlags: 0
@@ -12090,7 +12119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4633418183042296577
 RectTransform:
   m_ObjectHideFlags: 0

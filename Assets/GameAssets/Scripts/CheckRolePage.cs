@@ -58,6 +58,8 @@ namespace GameAssets.Scripts
         }
         private void HandleBackButton()
         {
+            currentPlayerIndex = 0;
+            HandleNextPlayerButton();
             gameStateManager.SwitchGameState(GameStateManager.GameState.STARTGAME);
         }
         private void HandleEnteranceButton()

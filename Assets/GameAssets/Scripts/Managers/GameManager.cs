@@ -15,6 +15,7 @@ namespace GameAssets.Scripts.Managers
     
         public bool isItFirstGame = true;
         
+        public string impostorName = "";
         public List<Player.Player> GamePlayers
         {
             get => gamePlayers;
@@ -51,6 +52,7 @@ namespace GameAssets.Scripts.Managers
                 player.Role = player == gamePlayers[impostorIndex] ? Player.Role.IMPOSTOR : Player.Role.CREWMATE; // Rastgele bir oyuncuyu sahtekar olarak ayarlayın
                 player.Place = player == gamePlayers[impostorIndex] ? "impostor" : place; // Impostor'a farklı place verme 
             }
+            impostorName = gamePlayers[impostorIndex].Name;
         }
         public void ResetGame()
         {
