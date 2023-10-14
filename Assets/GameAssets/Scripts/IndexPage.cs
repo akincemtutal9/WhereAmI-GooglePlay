@@ -21,7 +21,6 @@ namespace GameAssets.Scripts
         
         protected override void Start()
         {
-            AdmobAdsManager.Instance.LoadBannerAd();
             base.Start();
             freeGoldButton.onClick.AddListener(HandleFreeGoldButtonClicked);
             settingsButton.onClick.AddListener(HandleSettingsButtonClicked);
@@ -33,7 +32,6 @@ namespace GameAssets.Scripts
         }
         private void HandleFreeGoldButtonClicked()
         {
-            AdmobAdsManager.Instance.LoadRewardedAd();
             AdmobAdsManager.Instance.ShowRewardedAd();
         }
         private void HandleSettingsButtonClicked()

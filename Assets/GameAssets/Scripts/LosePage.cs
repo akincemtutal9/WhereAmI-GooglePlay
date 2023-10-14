@@ -28,7 +28,6 @@ namespace GameAssets.Scripts
         
         private void HandlePlayAgainButton()
         {
-            AdmobAdsManager.Instance.LoadInterstitialAd();
             AdmobAdsManager.Instance.ShowInterstitialAd();
             gameStateManager.SwitchGameState(GameStateManager.GameState.MAINMENU);
             GameManager.Instance.ResetGame();

@@ -52,6 +52,9 @@ namespace GameAssets.Scripts.Managers
         
         private void Start()
         {
+            LoadInterstitialAd();
+            LoadRewardedAd();
+            LoadBannerAd();
             ShowCoins();
 
             MobileAds.RaiseAdEventsOnUnityMainThread = true;
@@ -99,6 +102,9 @@ namespace GameAssets.Scripts.Managers
         else {
             print("Rewarded ad not ready");
         }
+        
+        LoadRewardedAd();
+        
     }
     public void RewardedAdEvents(RewardedAd ad)
     {
@@ -223,7 +229,6 @@ namespace GameAssets.Scripts.Managers
         public void LoadInterstitialAd()
         {
             DestroyInterstitialAd();
-            
         }
 
         private void DestroyInterstitialAd()
@@ -262,6 +267,8 @@ namespace GameAssets.Scripts.Managers
             {
                 print("Interstitial ad is not ready yet");
             }
+            
+            LoadInterstitialAd();
         }
 
         public void InterstitialEvents(InterstitialAd ad)
