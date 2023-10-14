@@ -8,7 +8,7 @@ namespace GameAssets.Scripts
     public class DebatePage : GameStateManagerProvider
     {
         [SerializeField] private Button voteButton;
-
+        
         protected override void Start()
         {
             base.Start();

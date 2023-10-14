@@ -1,3 +1,4 @@
+using System;
 using GameAssets.Scripts.Managers;
 using GameAssets.Scripts.Utils;
 using UnityEngine;
@@ -17,9 +18,10 @@ namespace GameAssets.Scripts
         [SerializeField] private Button linkedinButton;
         [SerializeField] private Button instagramButton;
         [SerializeField] private Button googlePlayButton;
-
+        
         protected override void Start()
         {
+            AdmobAdsManager.Instance.LoadBannerAd();
             base.Start();
             freeGoldButton.onClick.AddListener(HandleFreeGoldButtonClicked);
             settingsButton.onClick.AddListener(HandleSettingsButtonClicked);
@@ -31,7 +33,8 @@ namespace GameAssets.Scripts
         }
         private void HandleFreeGoldButtonClicked()
         {
-            //reklam izlet parasını ver
+            AdmobAdsManager.Instance.LoadRewardedAd();
+            AdmobAdsManager.Instance.ShowRewardedAd();
         }
         private void HandleSettingsButtonClicked()
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace GameAssets.Scripts.Managers
         {
             slider.value = 1;
         }
-
+        
         public void ShowInfo(string info)
         {
             if (!isInfoActive)
