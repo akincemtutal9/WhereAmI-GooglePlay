@@ -25,7 +25,27 @@ namespace GameAssets.Scripts.Managers
             // Make the SoundManager persist across scenes
             DontDestroyOnLoad(gameObject);
         }
+        
+        public void PlayMusicInLoop(AudioClip clip)
+        {
+            if (clip != null)
+            {
+                musicSource.clip = clip;
+                musicSource.loop = true;
+                musicSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("The provided AudioClip for music is null.");
+            }
+        }
 
+        public void StopMusicInLoop()
+        {
+            musicSource.clip = null;
+            musicSource.loop = false;
+            musicSource.Stop();
+        }
         public void PlaySoundEffect(AudioClip clip)
         {
             soundEffectSource.PlayOneShot(clip);

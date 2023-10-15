@@ -7,6 +7,7 @@ namespace GameAssets.Scripts.Managers
 {
     public class ErrorController : MonoBehaviour
     {
+        [SerializeField] private AudioClip errorClip;
         [SerializeField] private GameObject errorObject;
         [SerializeField] private TextMeshProUGUI errorText;
         [SerializeField] private Slider slider;
@@ -51,6 +52,7 @@ namespace GameAssets.Scripts.Managers
             if (!isErrorActive)
             {
                 errorObject.SetActive(true); // Error objesini etkinleştirin
+                SoundManager.instance.PlaySoundEffect(errorClip);
                 errorText.text = errorMessage; // Hata mesajını ayarlayın
                 isErrorActive = true;
 

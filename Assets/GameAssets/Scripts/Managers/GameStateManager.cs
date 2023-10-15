@@ -97,5 +97,11 @@ namespace GameAssets.Scripts.Managers
             // Şu anki game state'i güncelle
             currentGameState = newGameState;
         }
+
+        public GameState GetCurrentState()
+        {
+            return currentGameState;
+        }
+        
     }
 }

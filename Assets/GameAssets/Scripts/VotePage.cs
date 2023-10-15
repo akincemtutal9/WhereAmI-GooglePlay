@@ -9,6 +9,8 @@ namespace GameAssets.Scripts
 {
     public class VotePage : GameStateManagerProvider
     {
+        [SerializeField] private AudioClip acunMusic;
+        
         [Header("Main Panel Grid")]
         [SerializeField] private Transform playerGrid;
         [SerializeField] private GameObject playerUIPrefab;
@@ -21,6 +23,7 @@ namespace GameAssets.Scripts
 
         private void OnEnable()
         {
+            SoundManager.instance.PlayMusicInLoop(acunMusic);
             endVoteSessionButton.gameObject.SetActive(false);
             ShowNextPlayerTurn();
             UpdatePlayerListUI();
@@ -30,6 +33,7 @@ namespace GameAssets.Scripts
         }
         private void OnDisable()
         {
+            SoundManager.instance.StopMusicInLoop();
             voteButton.onClick.RemoveListener(HandleVoteButton);
             endVoteSessionButton.onClick.RemoveListener(HandleEndVoteSessionButton);
         }
