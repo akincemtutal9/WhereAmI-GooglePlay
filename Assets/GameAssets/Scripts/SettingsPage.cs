@@ -35,14 +35,14 @@ namespace GameAssets.Scripts
         {
             if (isSoundOpen)
             {
-                soundButton.image.color = Color.blue;
+                soundButton.image.color = HexToColor("F2C84B"); // Sarı
                 soundText.text = "Sound: ON";
                 isSoundOpen = false;
                 SoundManager.instance.StartMusic();
             }
             else
             {
-                soundButton.image.color = Color.red;
+                soundButton.image.color = HexToColor("F26457");// Kırmızı
                 soundText.text = "Sound: OFF";
                 isSoundOpen = true;   
                 SoundManager.instance.StopMusic();
@@ -52,18 +52,27 @@ namespace GameAssets.Scripts
         {
             if (isSfxOpen)
             {
-                sfxButton.image.color = Color.blue;
+                sfxButton.image.color = HexToColor("F2C84B"); // Blue
                 sfxText.text = "SFX: ON";
                 isSfxOpen = false;
                 SoundManager.instance.StartSfx();
             }
             else
             {
-                sfxButton.image.color = Color.red;
+                sfxButton.image.color = HexToColor("F26457"); // Red
                 sfxText.text = "SFX: OFF";
                 isSfxOpen = true;   
                 SoundManager.instance.StopSfx();
             }
+        }
+        private Color HexToColor(string hex)
+        {
+            if (ColorUtility.TryParseHtmlString("#" + hex, out Color color))
+            {
+                return color;
+            }
+            // Return a default color if parsing fails
+            return Color.white;
         }
         private void OnBackButtonClicked()
         {

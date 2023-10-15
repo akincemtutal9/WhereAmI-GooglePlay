@@ -126,7 +126,7 @@ namespace GameAssets.Scripts
                 }
             }
             CastOut(highestVotePlayer);
-            InfoController.Instance.ShowInfo("<color=yellow>" + highestVotePlayer.Name + " is cast out!</color> Impostor still among us!");
+            InfoController.Instance.ShowInfo("<color=white>" + highestVotePlayer.Name + " is cast out!</color> Impostor still among us!");
             ResetVotes();
         }
         private void ResetVotes()
