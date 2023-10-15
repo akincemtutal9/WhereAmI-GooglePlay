@@ -75,6 +75,7 @@ namespace GameAssets.Scripts
         {
             topPanel.SetActive(false);
             mainPanel.SetActive(false);
+            bottomPanel.SetActive(false);
             playerAddingPanel.SetActive(true);
         }
         private void HandleClosePlayerAddingPanelButton()

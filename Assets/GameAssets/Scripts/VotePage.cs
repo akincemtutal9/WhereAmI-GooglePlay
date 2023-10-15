@@ -64,7 +64,7 @@ namespace GameAssets.Scripts
             {
                 child.transform.GetChild(1).GetComponent<TMP_Text>().text = "";
             }
-            button.transform.GetChild(1).GetComponent<TMP_Text>().text = "Selected";
+            button.transform.GetChild(1).GetComponent<TMP_Text>().text = "Selected!!";
             selectedPlayer = player;
         }
         private void HandleVoteButton()
