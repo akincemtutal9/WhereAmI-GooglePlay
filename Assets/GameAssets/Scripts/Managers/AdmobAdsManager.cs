@@ -55,7 +55,7 @@ namespace GameAssets.Scripts.Managers
             LoadInterstitialAd();
             LoadRewardedAd();
             LoadBannerAd();
-            ShowCoins();
+            
 
             MobileAds.RaiseAdEventsOnUnityMainThread = true;
             MobileAds.Initialize(initStatus =>
@@ -96,7 +96,7 @@ namespace GameAssets.Scripts.Managers
             rewardedAd.Show((Reward reward) =>
             {
                 print("Give reward to player !!");
-                GrantCoins(100);
+                GameManager.Instance.GrantCoins(1);
             });
         }
         else {
@@ -309,24 +309,5 @@ namespace GameAssets.Scripts.Managers
         }
 
         #endregion
-        
-        #region extra
-        public void GrantCoins(int coin)
-        {
-            int crrCoin = PlayerPrefs.GetInt("totalCoins"); 
-            crrCoin += coin;
-            PlayerPrefs.SetInt("totalCoins", crrCoin);
-
-            ShowCoins();
-
-        }
-        private void ShowCoins()
-        {
-            totalCoinsText.text = PlayerPrefs.GetInt("totalCoins").ToString();
-        }
-        #endregion
-        
-        
-        
     }
 }
