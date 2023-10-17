@@ -20,12 +20,12 @@ namespace GameAssets.Scripts.Managers
         }
 
         [SerializeField] private TextMeshProUGUI totalCoinsText;
-        [SerializeField] private string appID = "ca-app-pub-3940256099942544~3347511713";
+        [SerializeField] private string appID = "ca-app-pub-3289243164533066~4839826380";
         
         #if UNITY_ANDROID
-        private string bannerID = "ca-app-pub-3940256099942544/6300978111";
-        private string interID = "ca-app-pub-3940256099942544/1033173712";
-        private string rewardedID = "ca-app-pub-3940256099942544/5224354917";
+        private string bannerID = "ca-app-pub-3289243164533066/6612891291";
+        private string interID = "ca-app-pub-3289243164533066/8395928017";
+        private string rewardedID = "ca-app-pub-3289243164533066/9697347495";
         private string nativeID = "ca-app-pub-3940256099942544/2247696110";
         #elif UNITY_IPHONE
         private string bannerID = "ca-app-pub-3940256099942544/2934735716";
