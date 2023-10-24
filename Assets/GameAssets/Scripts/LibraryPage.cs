@@ -96,7 +96,7 @@ namespace GameAssets.Scripts
 
             foreach (string place in GameManager.Instance.PlaceList)
             {
-                GameObject playerUI = Instantiate(placeUIPrefab, placeGrid, true);
+                GameObject playerUI = Instantiate(placeUIPrefab, placeGrid, false);
 
                 TMP_Text placeNameText = playerUI.transform.GetChild(0).GetComponent<TMP_Text>();
                 placeNameText.text = place;

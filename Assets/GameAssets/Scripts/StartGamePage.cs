@@ -128,7 +128,7 @@ namespace GameAssets.Scripts
             
             foreach (Player.Player player in GameManager.Instance.GamePlayers)
             {
-                GameObject playerUI = Instantiate(playerUIPrefab, playerGrid, true);
+                GameObject playerUI = Instantiate(playerUIPrefab, playerGrid, false);
 
                 TMP_Text playerNameText = playerUI.GetComponentInChildren<TMP_Text>();
                 playerNameText.text = player.Name;
